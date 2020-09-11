@@ -8,11 +8,19 @@ import com.sevenpeakssoftware.zubair.R
 import com.sevenpeakssoftware.zubair.databinding.ItemArticleBinding
 import com.sevenpeakssoftware.zubair.model.Article
 
-class ArticleListAdapter: RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
-    private lateinit var articleList:List<Article>
+class ArticleListAdapter : RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
+    private lateinit var articleList: List<Article>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleListAdapter.ViewHolder {
-        val binding: ItemArticleBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_article, parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ArticleListAdapter.ViewHolder {
+        val binding: ItemArticleBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_article,
+            parent,
+            false
+        )
         return ViewHolder(binding)
     }
 
@@ -21,18 +29,19 @@ class ArticleListAdapter: RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() 
     }
 
     override fun getItemCount(): Int {
-        return if(::articleList.isInitialized) articleList.size else 0
+        return if (::articleList.isInitialized) articleList.size else 0
     }
 
-    fun updateArticleList(postList:List<Article>){
+    fun updateArticleList(postList: List<Article>) {
         this.articleList = postList
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: ItemArticleBinding):RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ItemArticleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         private val viewModel = ArticleViewModel()
 
-        fun bind(article:Article){
+        fun bind(article: Article) {
             viewModel.bind(article)
             binding.viewModel = viewModel
         }

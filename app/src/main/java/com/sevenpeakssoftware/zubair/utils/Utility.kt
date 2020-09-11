@@ -1,16 +1,14 @@
 package com.sevenpeakssoftware.zubair.utils
 
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.LocalDate
+import android.os.Build
+import android.support.annotation.RequiresApi
 import java.time.LocalDateTime
-import java.time.Year
 import java.time.format.DateTimeFormatter
-import java.util.*
 import java.util.Calendar
 
 
-fun getFormatedDate(serverDate: String):String {
+@RequiresApi(Build.VERSION_CODES.O)
+fun getFormatedDate(serverDate: String): String {
 
     var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
     var postedDate = LocalDateTime.parse(serverDate, formatter)
@@ -20,13 +18,9 @@ fun getFormatedDate(serverDate: String):String {
     val today = Calendar.getInstance()
     val currentYear = today.get(Calendar.YEAR);
 
-    if (currentYear.equals(postedDate.year))
+    if (currentYear.equals(postedDate.year)) {
         return LocalDateTime.parse(serverDate, formatter).format(currentYearDateFormat);
-    else
+    } else {
         return LocalDateTime.parse(serverDate, formatter).format(otherYearDateFormate);
+    }
 }
-
-
-
-
-
