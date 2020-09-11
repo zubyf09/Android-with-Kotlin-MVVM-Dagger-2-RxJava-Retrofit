@@ -12,13 +12,10 @@ interface ArticleDao {
 
     @Insert
     fun insert(vararg users: Article)
-    
+
     @Transaction
     @Insert
     fun insertAll(articles: List<Article>)
-
-
-
 
 //    @Insert
 //    fun insertAll(vararg users: ArticleResponse)

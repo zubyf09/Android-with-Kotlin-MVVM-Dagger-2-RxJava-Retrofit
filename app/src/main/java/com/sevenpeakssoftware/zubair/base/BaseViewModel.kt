@@ -7,11 +7,11 @@ import com.sevenpeakssoftware.zubair.injection.module.NetworkModule
 import com.sevenpeakssoftware.zubair.ui.cars.ArticleListViewModel
 import com.sevenpeakssoftware.zubair.ui.cars.ArticleViewModel
 
-abstract class BaseViewModel:ViewModel(){
+abstract class BaseViewModel : ViewModel() {
     private val injector: ViewModelInjector = DaggerViewModelInjector
-            .builder()
-            .networkModule(NetworkModule)
-            .build()
+        .builder()
+        .networkModule(NetworkModule)
+        .build()
 
     init {
         inject()

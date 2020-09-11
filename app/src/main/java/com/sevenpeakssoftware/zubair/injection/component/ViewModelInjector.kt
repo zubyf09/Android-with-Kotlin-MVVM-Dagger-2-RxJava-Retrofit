@@ -18,6 +18,7 @@ interface ViewModelInjector {
      * @param articleListViewModel ArticleListViewModel in which to inject the dependencies
      */
     fun inject(articleListViewModel: ArticleListViewModel)
+
     /**
      * Injects required dependencies into the specified ArticleViewModel.
      * @param articleViewModel ArticleViewModel in which to inject the dependencies

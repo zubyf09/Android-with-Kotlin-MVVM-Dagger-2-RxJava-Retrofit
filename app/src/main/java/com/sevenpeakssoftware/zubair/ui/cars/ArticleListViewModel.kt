@@ -13,18 +13,18 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ArticleListViewModel(private val articleDao: ArticleDao): BaseViewModel(){
+class ArticleListViewModel(private val articleDao: ArticleDao) : BaseViewModel() {
     @Inject
     lateinit var articleApi: ArticleApi
     val articleListAdapter: ArticleListAdapter = ArticleListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
-    val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadArticles() }
 
     private lateinit var subscription: Disposable
 
-    init{
+    init {
         loadArticles()
     }
 
@@ -34,13 +34,12 @@ class ArticleListViewModel(private val articleDao: ArticleDao): BaseViewModel(){
     }
 
 
-    private fun loadArticles(){
+    private fun loadArticles() {
         subscription = Observable.fromCallable { articleDao.all }
-            .concatMap {
-                    dbArticleList ->
-                if(dbArticleList.isEmpty())
-                    articleApi.getArticles().concatMap {
-                            apiArticleResponse -> articleDao.insertAll( apiArticleResponse.content)
+            .concatMap { dbArticleList ->
+                if (dbArticleList.isEmpty())
+                    articleApi.getArticles().concatMap { apiArticleResponse ->
+                        articleDao.insertAll(apiArticleResponse.content)
                         Observable.just(apiArticleResponse)
                     }
                 else
@@ -56,23 +55,23 @@ class ArticleListViewModel(private val articleDao: ArticleDao): BaseViewModel(){
             )
     }
 
-    private fun onRetrieveArticleListStart(){
+    private fun onRetrieveArticleListStart() {
         loadingVisibility.value = View.VISIBLE
         errorMessage.value = null
     }
 
-    private fun onRetrieveArticleListFinish(){
+    private fun onRetrieveArticleListFinish() {
         loadingVisibility.value = View.GONE
     }
 
 
-    private fun onRetrieveArticleListSuccess(articleList:List<Article>){
+    private fun onRetrieveArticleListSuccess(articleList: List<Article>) {
 
 
         articleListAdapter.updateArticleList(articleList)
     }
 
-    private fun onRetrieveArticleListError(){
+    private fun onRetrieveArticleListError() {
         errorMessage.value = R.string.post_error
     }
 }
