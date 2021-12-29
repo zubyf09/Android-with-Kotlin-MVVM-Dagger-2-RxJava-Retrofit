@@ -49,10 +49,9 @@ object NetworkModule {
     @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(
-                    OkHttpClient.Builder()
-
+            .baseUrl(BASE_URL)
+            .client(
+                OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor()
                         .apply {
                             level = if (BuildConfig.DEBUG)
@@ -63,11 +62,9 @@ object NetworkModule {
                     .readTimeout(NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
                     .writeTimeout(NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
                     .build()
-                )
-                .addConverterFactory(MoshiConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-
-
-                .build()
+            )
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .build()
     }
 }

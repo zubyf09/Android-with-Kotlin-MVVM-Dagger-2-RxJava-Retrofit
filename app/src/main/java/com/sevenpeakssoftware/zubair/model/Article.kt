@@ -8,9 +8,9 @@ data class Article(
         @field:PrimaryKey
         val id: Int,
         val title: String,
-        val dateTime:String,
-        val ingress:String,
-        val image:String,
-        val created:Double,
-        val changed:Double
+        val dateTime: String,
+        val ingress: String,
+        val image: String,
+        val created: Double,
+        val changed: Double
 )
